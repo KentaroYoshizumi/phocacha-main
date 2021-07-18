@@ -1,4 +1,3 @@
-// --- ここから追加 ---
 import styled from 'styled-components';
 
 // components
@@ -11,10 +10,10 @@ import { FONT_SIZE } from '../../style_constants';
 // propsや関数が不要な場合にはこれだけでもOK
 export const OrderButton = styled(BaseButton)`
   width: 390px;
-  background-color: black;
+  background-color: #0033FF;
   color: white;
   border-style: none;
   padding: 8px 16px;
   font-size: ${FONT_SIZE.BODY1};
 `;
-// --- ここまで追加 ---
+

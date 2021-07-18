@@ -1,4 +1,4 @@
-// --- ここから追加 ---
+
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
@@ -20,18 +20,18 @@ const AmountText = styled.p`
 `;
 
 export const OrderDetailItem = ({
-  restaurantId,
-  restaurantName,
-  restaurantFee,
+  shopId,
+  shopName,
+  shopFee,
   timeRequired,
-  foodCount,
+  photoCount,
   price,
 }) => (
   <Fragment>
     <LineWrapper>
       <LocalMallIcon />
-      <Link to={`/restaurants/${restaurantId}/foods`}>
-        {restaurantName}
+      <Link to={`/shops/${shopId}/photos`}>
+        {shopName}
       </Link>
     </LineWrapper>
     <LineWrapper>
@@ -43,12 +43,12 @@ export const OrderDetailItem = ({
         商品数
       </p>
       <p>
-        {foodCount}
+        {photoCount}
       </p>
     </LineWrapper>
     <LineWrapper>
       <p>
-        商品数:{foodCount}
+        商品数:{photoCount}
       </p>
       <p>
         ¥ {price}
@@ -59,7 +59,7 @@ export const OrderDetailItem = ({
         配送料
       </p>
       <p>
-        ¥ {restaurantFee}
+        ¥ {shopFee}
       </p>
     </LineWrapper>
     <LineWrapper>
@@ -67,9 +67,9 @@ export const OrderDetailItem = ({
         合計
       </AmountText>
       <AmountText>
-        ¥ {price + restaurantFee}
+        ¥ {price + shopFee}
       </AmountText>
     </LineWrapper>
   </Fragment>
 );
-// --- ここから追加 ---
+

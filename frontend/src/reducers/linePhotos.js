@@ -1,37 +1,36 @@
-// --- ここから追加 ---
 import { REQUEST_STATE } from '../constants';
 
 export const initialState = {
   fetchState: REQUEST_STATE.INITIAL, // 取得状況
   postState: REQUEST_STATE.INITIAL,  // 登録状況
-  lineFoodsSummary: null,            // 仮注文データ
+  linePhotosSummary: null,            // 仮注文データ
 };
 
-export const lineFoodsActionTyps = {
+export const linePhotosActionTyps = {
   FETCHING: 'FETCHING',
   FETCH_SUCCESS: 'FETCH_SUCCESS',
   POSTING: 'POSTING',
   POST_SUCCESS: 'POST_SUCCESS',
 }
 
-export const lineFoodsReducer = (state, action) => {
+export const linePhotosReducer = (state, action) => {
   switch (action.type) {
-    case lineFoodsActionTyps.FETCHING:
+    case linePhotosActionTyps.FETCHING:
       return {
         ...state,
         fetchState: REQUEST_STATE.LOADING,
       };
-    case lineFoodsActionTyps.FETCH_SUCCESS:
+    case linePhotosActionTyps.FETCH_SUCCESS:
       return {
         fetchState: REQUEST_STATE.OK,
-        lineFoodsSummary: action.payload.lineFoodsSummary,
+        linePhotosSummary: action.payload.linePhotosSummary,
       };
-    case lineFoodsActionTyps.POSTING:
+    case linePhotosActionTyps.POSTING:
       return {
         ...state,
         postState: REQUEST_STATE.LOADING,
       };
-    case lineFoodsActionTyps.POST_SUCCESS:
+    case linePhotosActionTyps.POST_SUCCESS:
       return {
         ...state,
         postState: REQUEST_STATE.OK,

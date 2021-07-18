@@ -1,27 +1,26 @@
-// --- ここから追加 ---
 import { REQUEST_STATE } from '../constants';
 
 export const initialState = {
   fetchState: REQUEST_STATE.INITIAL,
-  restaurantsList: [],
+  photosList: [],
 };
 
-export const restaurantsActionTyps = {
+export const photosActionTyps = {
   FETCHING: 'FETCHING',
   FETCH_SUCCESS: 'FETCH_SUCCESS'
 }
 
-export const restaurantsReducer = (state, action) => {
+export const photosReducer = (state, action) => {
   switch (action.type) {
-    case restaurantsActionTyps.FETCHING:
+    case photosActionTyps.FETCHING:
       return {
         ...state,
         fetchState: REQUEST_STATE.LOADING,
       };
-    case restaurantsActionTyps.FETCH_SUCCESS:
+    case photosActionTyps.FETCH_SUCCESS:
       return {
         fetchState: REQUEST_STATE.OK,
-        restaurantsList: action.payload.restaurants,
+        photosList: action.payload.photos,
       };
     default:
       throw new Error();

@@ -1,4 +1,4 @@
-// --- ここから追加 ---
+
 import React from 'react';
 
 // style
@@ -12,4 +12,4 @@ export const CountDownButton = ({
     ー
   </RoundButton>
 )
-// --- ここまで追加 ---
+

@@ -7,21 +7,21 @@ import {
 } from "react-router-dom";
 
 // components
-import { Restaurants } from './containers/Restaurants.jsx';
-import { Foods } from './containers/Foods.jsx';
+import { Shops } from './containers/Shops.jsx';
+import { Photos } from './containers/Photos.jsx';
 import { Orders } from './containers/Orders.jsx';
 
 function App() {
   return (
     <Router>
       <Switch>
-        // 店舗一覧ページ
+        // photo一覧ページ
         <Route
           exact
-          path="/restaurants">
-          <Restaurants />
+          path="/shops">
+          <Shops />
         </Route>
-        
+
         // 注文ページ
         <Route
           exact
@@ -29,14 +29,14 @@ function App() {
           <Orders />
         </Route>
         <Route
-  exact
-  path="/restaurants/:restaurantsId/foods"
-  render={({ match }) =>
-    <Foods
-      match={match}
-    />
-}
-/>
+          exact
+          path="/shops/:shopsId/photos"
+          render={({ match }) =>
+            <Photos
+              match={match}
+            />
+          }
+        />
       </Switch>
     </Router>
   );

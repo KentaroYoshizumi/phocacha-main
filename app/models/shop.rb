@@ -1,6 +1,6 @@
-class Restaurant < ApplicationRecord
-  has_many :foods
-  has_many :line_foods, through: :foods
+class Shop < ApplicationRecord
+  has_many :photos
+  has_many :line_photos, through: :photos
 
   validates :name, :fee, :time_required, presence: true
   validates :name, length: { maximum: 30 }

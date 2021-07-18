@@ -1,5 +1,5 @@
 import React, { Fragment, useReducer, useEffect } from 'react';
-// --- ここから追加 ---
+
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 
@@ -8,22 +8,22 @@ import { OrderDetailItem } from '../components/OrderDetailItem';
 import { OrderButton } from '../components/Buttons/OrderButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-// --- ここまで追加 ---
+
 
 // apis
-import { fetchLineFoods } from '../apis/line_foods';
+import { fetchLinePhotos } from '../apis/line_photos';
 import { postOrder } from '../apis/orders';
 
 // reducers
 import {
   initialState,
-  lineFoodsActionTyps,
-  lineFoodsReducer,
-} from '../reducers/lineFoods';
+  linePhotosActionTyps,
+  linePhotosReducer,
+} from '../reducers/linePhotos';
 
-// --- ここから追加 ---
+
 // images
-import MainLogo from '../images/logo.png';
+import MainLogo from '../images/logo.jpg';
 
 // constants
 import { REQUEST_STATE } from '../constants';
@@ -46,35 +46,35 @@ const OrderListWrapper = styled.div`
 const OrderItemWrapper = styled.div`
   margin-bottom: 50px;
 `;
-// --- ここまで追加 ---
+
 
 export const Orders = () => {
-  const [state, dispatch] = useReducer(lineFoodsReducer, initialState);
+  const [state, dispatch] = useReducer(linePhotosReducer, initialState);
 
   useEffect(() => {
-    dispatch({ type: lineFoodsActionTyps.FETCHING });
-    fetchLineFoods()
+    dispatch({ type: linePhotosActionTyps.FETCHING });
+    fetchLinePhotos()
       .then((data) =>
         dispatch({
-          type: lineFoodsActionTyps.FETCH_SUCCESS,
+          type: linePhotosActionTyps.FETCH_SUCCESS,
           payload: {
-            lineFoodsSummary: data
+            linePhotosSummary: data
           }
         })
       );
   }, []);
 
-  const postLineFoods = () => {
-    dispatch({ type: lineFoodsActionTyps.POSTING });
+  const postLinePhotos = () => {
+    dispatch({ type: linePhotosActionTyps.POSTING });
     postOrder({
-      line_food_ids: state.lineFoodsSummary.line_food_ids,
+      line_photo_ids: state.linePhotosSummary.line_photo_ids,
     }).then(() => {
-      dispatch({ type: lineFoodsActionTyps.POST_SUCCESS });
+      dispatch({ type: linePhotosActionTyps.POST_SUCCESS });
     });
     window.location.reload();
   };
 
-  // --- ここから追加 ---
+
   const orderButtonLabel = () => {
     switch (state.postState) {
       case REQUEST_STATE.LOADING:
@@ -85,13 +85,13 @@ export const Orders = () => {
         return '注文を確定する';
     }
   };
-  // --- ここまで追加 ---
+
 
   return (
     <Fragment>
-      // --- ここから修正 ---
+
       <HeaderWrapper>
-        <Link to="/restaurants">
+        <Link to="/shops">
           <MainLogoImage src={MainLogo} alt="main logo" />
         </Link>
       </HeaderWrapper>
@@ -103,37 +103,37 @@ export const Orders = () => {
               state.fetchState === REQUEST_STATE.LOADING ?
                 <CircularProgress />
                 :
-                state.lineFoodsSummary &&
+                state.linePhotosSummary &&
                 <OrderDetailItem
-                  restaurantFee={state.lineFoodsSummary.restaurant.fee}
-                  restaurantName={state.lineFoodsSummary.restaurant.name}
-                  restaurantId={state.lineFoodsSummary.restaurant.id}
-                  timeRequired={state.lineFoodsSummary.restaurant.time_required}
-                  foodCount={state.lineFoodsSummary.count}
-                  price={state.lineFoodsSummary.amount}
+                  shopFee={state.linePhotosSummary.shop.fee}
+                  shopName={state.linePhotosSummary.shop.name}
+                  shopId={state.linePhotosSummary.shop.id}
+                  timeRequired={state.linePhotosSummary.shop.time_required}
+                  photoCount={state.linePhotosSummary.count}
+                  price={state.linePhotosSummary.amount}
                 />
             }
           </OrderItemWrapper>
           <div>
             {
-              state.fetchState === REQUEST_STATE.OK && state.lineFoodsSummary &&
+              state.fetchState === REQUEST_STATE.OK && state.linePhotosSummary &&
               <OrderButton
-                onClick={() => postLineFoods()}
+                onClick={() => postLinePhotos()}
                 disabled={state.postState === REQUEST_STATE.LOADING || state.postState === REQUEST_STATE.OK}
               >
                 {orderButtonLabel()}
               </OrderButton>
             }
             {
-              state.fetchState === REQUEST_STATE.OK && !(state.lineFoodsSummary) &&
+              state.fetchState === REQUEST_STATE.OK && !(state.linePhotosSummary) &&
               <p>
                 注文予定の商品はありません。
-                </p>
+              </p>
             }
           </div>
         </div>
       </OrderListWrapper>
-    // --- ここまで修正 ---
+
     </Fragment>
   )
 }

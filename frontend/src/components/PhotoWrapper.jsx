@@ -1,4 +1,3 @@
-// --- ここから追加 ---
 import React from 'react';
 import styled from 'styled-components';
 
@@ -19,7 +18,7 @@ const Wrapper = styled.div`
   cursor: pointer;
 `;
 
-const FoodDetail = styled.div`
+const PhotoDetail = styled.div`
   padding: 24px 16px;
   width: 250px;
 `;
@@ -32,28 +31,28 @@ const PriceWrapper = styled.div`
   margin-top: 16px;
 `
 
-const FoodImageNode = styled.img`
+const PhotoImageNode = styled.img`
   width: 250px;
 `;
 
-export const FoodWrapper = ({
-  food,
-  onClickFoodWrapper,
+export const PhotoWrapper = ({
+  photo,
+  onClickPhotoWrapper,
   imageUrl,
 }) => (
-  <Wrapper onClick={() => onClickFoodWrapper(food)}>
-    <FoodDetail>
-      {food.name}
+  <Wrapper onClick={() => onClickPhotoWrapper(photo)}>
+    <PhotoDetail>
+      {photo.name}
       <DescriptionWrapper>
         <SubText>
-          {food.description}
+          {photo.description}
         </SubText>
       </DescriptionWrapper>
       <PriceWrapper>
-        ¥{food.price}
+        ¥{photo.price}
       </PriceWrapper>
-    </FoodDetail>
-    <FoodImageNode src={imageUrl} />
+    </PhotoDetail>
+    <PhotoImageNode src={imageUrl} />
   </Wrapper>
 )
-// --- ここまで追加 ---
+

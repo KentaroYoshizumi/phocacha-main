@@ -6,15 +6,15 @@ import { REQUEST_STATE } from '../constants';
 
 import {
   initialState,
-  restaurantsActionTyps,
-  restaurantsReducer,
-} from '../reducers/restaurants';
+  shopsActionTyps,
+  shopsReducer,
+} from '../reducers/shop';
 
-import { fetchRestaurants } from '../apis/restaurants';
+import { fetchShops } from '../apis/shops';
 
-import MainLogo from '../images/logo.png';
-import MainCoverImage from '../images/main-cover-image.png';
-import RestaurantImage from '../images/restaurant-image.jpg';
+import MainLogo from '../images/logo.jpg';
+import Top from '../images/top.jpg';
+import SnowMountainImage from '../images/snowmountain.jpg';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -23,8 +23,9 @@ const HeaderWrapper = styled.div`
 `;
 
 const MainLogoImage = styled.img`
-  height: 90px;
-`
+height: 90px;
+`;
+
 
 const MainCoverImageWrapper = styled.div`
   text-align: center;
@@ -34,19 +35,19 @@ const MainCover = styled.img`
   height: 600px;
 `;
 
-const RestaurantsContentsList = styled.div`
+const ShopsContentsList = styled.div`
   display: flex;
   justify-content: space-around;
   margin-bottom: 150px;
 `;
 
-const RestaurantsContentWrapper = styled.div`
+const ShopsContentWrapper = styled.div`
   width: 450px;
   height: 300px;
   padding: 48px;
 `;
 
-const RestaurantsImageNode = styled.img`
+const SnowMountainImageNode = styled.img`
   width: 100%;
 `;
 
@@ -60,18 +61,18 @@ const SubText = styled.p`
   font-size: 12px;
 `;
 
-export const Restaurants = () => {
+export const Shops = () => {
 
-  const [state, dispatch] = useReducer(restaurantsReducer, initialState);
+  const [state, dispatch] = useReducer(shopsReducer, initialState);
 
   useEffect(() => {
-    dispatch({ type: restaurantsActionTyps.FETCHING });
-    fetchRestaurants()
+    dispatch({ type: shopsActionTyps.FETCHING });
+    fetchShops()
       .then((data) =>
         dispatch({
-          type: restaurantsActionTyps.FETCH_SUCCESS,
+          type: shopsActionTyps.FETCH_SUCCESS,
           payload: {
-            restaurants: data.restaurants
+            shops: data.shops
           }
         })
       )
@@ -83,10 +84,10 @@ export const Restaurants = () => {
         <MainLogoImage src={MainLogo} alt="main logo" />
       </HeaderWrapper>
       <MainCoverImageWrapper>
-        <MainCover src={MainCoverImage} alt="main cover" />
+        <MainCover src={Top} alt="main cover" />
       </MainCoverImageWrapper>
 
-      <RestaurantsContentsList>
+      <ShopsContentsList>
         {
           state.fetchState === REQUEST_STATE.LOADING ?
             <Fragment>
@@ -95,17 +96,17 @@ export const Restaurants = () => {
               <Skeleton variant="rect" width={450} height={300} />
             </Fragment>
             :
-            state.restaurantsList.map((item, index) =>
-              <Link to={`/restaurants/${item.id}/foods`} key={index} style={{ textDecoration: 'none' }}>
-                <RestaurantsContentWrapper>
-                  <RestaurantsImageNode src={RestaurantImage} />
+            state.shopsList.map((item, index) =>
+              <Link to={`/shops/${item.id}/photos`} key={index} style={{ textDecoration: 'none' }}>
+                <ShopsContentWrapper>
+                  <SnowMountainImageNode src={SnowMountainImage} />
                   <MainText>{item.name}</MainText>
                   <SubText>{`配送料：${item.fee}円 ${item.time_required}分`}</SubText>
-                </RestaurantsContentWrapper>
+                </ShopsContentWrapper>
               </Link>
             )
         }
-      </RestaurantsContentsList>
+      </ShopsContentsList>
     </Fragment>
   )
 }

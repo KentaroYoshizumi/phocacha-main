@@ -10,7 +10,7 @@ import { CountDownButton } from './Buttons/CountDownButton';
 import { OrderButton } from './Buttons/OrderButton';
 
 // images
-import OrderHeaderImage from '../images/order-header.png';
+import SandImage from '../images/sand.jpg';
 
 const OrderHeader = styled.img`
   width: 100%;
@@ -21,6 +21,7 @@ const DescriptionWrapper = styled.div`
   padding: 0 8px 8px 8px;
   height: 50px;
 `;
+
 
 const CountersWrapper = styled.div`
   margin-right: auto;
@@ -48,62 +49,10 @@ const PriceWrapper = styled.div`
   padding-top: 4px;
 `;
 
-import React from 'react';
-import { DialogContent, Dialog, DialogTitle, DialogActions } from '@material-ui/core';
-import styled from 'styled-components';
 
-// components
-import { SubText } from './StyledText';
-// --- ここから追加 ---
-import { CountUpButton } from './Buttons/CountUpButton';
-import { CountDownButton } from './Buttons/CountDownButton';
-import { OrderButton } from './Buttons/OrderButton';
-// --- ここまで追加 ---
 
-// images
-import OrderHeaderImage from '../images/order-header.png';
-
-const OrderHeader = styled.img`
-  width: 100%;
-  height: 350px;
-`;
-
-const DescriptionWrapper = styled.div`
-  padding: 0 8px 8px 8px;
-  height: 50px;
-`;
-
-// --- ここから追加 ---
-const CountersWrapper = styled.div`
-  margin-right: auto;
-  display: flex;
-  padding: 0 16px;
-`;
-
-const CountItem = styled.div`
-  margin: 0 8px;
-`
-
-const CountNum = styled.div`
-  padding-top: 10px;
-`
-
-const OrderTextWrapper = styled.div`
-  display: flex;
-`;
-
-const OrderButtonTextWrapper = styled.div`
-  width: 300px;
-`;
-
-const PriceWrapper = styled.div`
-  padding-top: 4px;
-`;
-// --- ここまで追加 ---
-
-// --- ここから修正 ---
-export const FoodOrderDialog = ({
-  food,
+export const PhotoOrderDialog = ({
+  photo,
   countNumber,
   isOpen,
   onClose,
@@ -116,14 +65,14 @@ export const FoodOrderDialog = ({
       open={isOpen}
       onClose={onClose}
     >
-      <OrderHeader src={OrderHeaderImage} alt="order header" />
+      <OrderHeader src={SandImage} alt="order header" />
       <DialogTitle>
-        {food.name}
+        {photo.name}
       </DialogTitle>
       <DialogContent>
         <DescriptionWrapper>
           <SubText>
-            {food.description}
+            {photo.description}
           </SubText>
         </DescriptionWrapper>
       </DialogContent>
@@ -155,12 +104,12 @@ export const FoodOrderDialog = ({
               {`${countNumber}点を注文に追加`}
             </OrderButtonTextWrapper>
             <PriceWrapper>
-              {`¥${countNumber * food.price}`}
+              {`¥${countNumber * photo.price}`}
             </PriceWrapper>
           </OrderTextWrapper>
         </OrderButton>
       </DialogActions>
     </Dialog>
-
   )
 }
+
